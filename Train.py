@@ -6,7 +6,7 @@ from tensorflow.keras.preprocessing.image import ImageDataGenerator
 from tensorflow.keras.applications import VGG16
 import matplotlib.pyplot as plt
 from sklearn.metrics import classification_report, confusion_matrix
-
+from tensorflow.keras import regularizers
 
 IMG_HEIGHT = 64
 IMG_WIDTH = 64
@@ -20,7 +20,7 @@ def load_and_preprocess_images(directory, label):
             img_path = os.path.join(directory, filename)
             img = cv2.imread(img_path)
             img = cv2.resize(img, (IMG_WIDTH, IMG_HEIGHT))
-            img = img.astype('float32') / 255.0  # Normalize pixel values to [0, 1]
+            img = img.astype('float32') / 255.0
             images.append(img)
             labels.append(label)
     return images, labels
@@ -71,7 +71,9 @@ for layer in base_model.layers:
 model = models.Sequential([
     base_model,
     layers.Flatten(),
-    layers.Dense(64, activation='relu'),
+    layers.Dense(64, activation='relu', kernel_regularizer=regularizers.l2(0.01)),
+    layers.Dropout(0.5),
+    layers.Dense(32, activation='relu', kernel_regularizer=regularizers.l2(0.01)),  
     layers.Dropout(0.5),
     layers.Dense(1, activation='sigmoid')
 ])
@@ -89,7 +91,7 @@ def classify_image(image):
     return prediction[0][0]
 
 
-history = model.fit(datagen.flow(X_train, y_train, batch_size=32), epochs=10, validation_data=(X_test, y_test))
+history = model.fit(datagen.flow(X_train, y_train, batch_size=32), epochs=20, validation_data=(X_test, y_test))
 
 
 test_loss, test_accuracy = model.evaluate(X_test, y_test)
