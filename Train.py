@@ -110,7 +110,7 @@ plt.show()
 
 y_pred = (model.predict(X_test) > 0.5).astype("int32")
 
-# Calculating classification report which includes precision, recall, F1-score
+
 classification_rep = classification_report(y_test, y_pred, target_names=['child', 'adult'])
 print("Classification Report:\n", classification_rep)
 
