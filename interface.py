@@ -7,12 +7,13 @@ model = load_model('adult_child_classifier_augmented_transfer.h5')
 
 
 def preprocess_frame(frame):
-    frame = cv2.resize(frame, (64, 64))
+    frame = cv2.resize(frame, (170, 120))
     frame = frame.astype('float32') / 255.0
-    return frame.reshape(1, 64, 64, 3)
+    return frame.reshape(1, 120, 170, 3)
 
 
-cap = cv2.VideoCapture(0)  # Use 0 for default webcam
+
+cap = cv2.VideoCapture(0)
 
 while True:
 

@@ -8,8 +8,8 @@ import matplotlib.pyplot as plt
 from sklearn.metrics import classification_report, confusion_matrix
 from tensorflow.keras import regularizers
 
-IMG_HEIGHT = 64
-IMG_WIDTH = 64
+IMG_HEIGHT = 120
+IMG_WIDTH = 170
 
 
 def load_and_preprocess_images(directory, label):
@@ -91,7 +91,7 @@ def classify_image(image):
     return prediction[0][0]
 
 
-history = model.fit(datagen.flow(X_train, y_train, batch_size=32), epochs=20, validation_data=(X_test, y_test))
+history = model.fit(datagen.flow(X_train, y_train, batch_size=32), epochs=10, validation_data=(X_test, y_test))
 
 
 test_loss, test_accuracy = model.evaluate(X_test, y_test)
