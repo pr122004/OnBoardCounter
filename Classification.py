@@ -26,8 +26,8 @@ def load_and_preprocess_images(directory, label):
     return images, labels
 
 
-train_adults_dir = 'D:\\OnBoardCounterDataSet\\train\\adults'
-train_children_dir = 'D:\\OnBoardCounterDataSet\\train\\children'
+train_adults_dir = 'D:\\OnBoardCounterBlurred\\TrainBlurred\\AdultBlurred'
+train_children_dir = 'D:\\OnBoardCounterBlurred\\TrainBlurred\\ChildBlurred'
 
 train_adult_images, train_adult_labels = load_and_preprocess_images(train_adults_dir, label=1)
 train_child_images, train_child_labels = load_and_preprocess_images(train_children_dir, label=0)
@@ -39,8 +39,8 @@ X_train = np.array(train_images)
 y_train = np.array(train_labels)
 
 
-test_adults_dir = 'D:\\OnBoardCounterDataSet\\test\\adults'
-test_children_dir = 'D:\\OnBoardCounterDataSet\\test\\children'
+test_adults_dir = 'D:\\OnBoardCounterBlurred\\TestBlurred\\AdultBlurred'
+test_children_dir = 'D:\\OnBoardCounterBlurred\\TestBlurred\\ChildBlurred'
 
 test_adult_images, test_adult_labels = load_and_preprocess_images(test_adults_dir, label=1)
 test_child_images, test_child_labels = load_and_preprocess_images(test_children_dir, label=0)
